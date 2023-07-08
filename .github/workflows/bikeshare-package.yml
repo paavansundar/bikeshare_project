@@ -29,20 +29,12 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
         if [ -f ./requirements/requirements.txt ]; then pip install -r ./requirements/requirements.txt; fi
-  Lint:
-    needs: build
-    runs-on: ${{needs.build.runs-on}}
-    steps:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-  Train:
-    needs: build
-    runs-on: ${{needs.build.runs-on}}
-    steps:
     - name: Train the model
       run: |
         python ./bikeshare_model/train_pipeline.py
@@ -51,20 +43,17 @@ jobs:
       run: |
         git config --global user.email "paavan.sundar@gmail.com"
         git config --global user.name "paavansundar"
-      
+        
     - name: Commit and push pkl file
       run: |
         git add -f ./bikeshare_model/trained_models/*.pkl
         git commit -m 'pushing new pkl file.'
         git push
-  Test:
-    needs: build
-    runs-on: ${{needs.build.runs-on}}
-    steps:
+    
     - name: Test with pytest
       run: |
         pytest
-        
+         
     - name: Build wheel file
       run: |
         python setup.py bdist_wheel --universal
