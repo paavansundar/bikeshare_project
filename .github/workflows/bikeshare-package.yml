@@ -46,3 +46,9 @@ jobs:
     - name: Build wheel file
       run: |
         python setup.py bdist_wheel --dist-dir dist
+      
+    - name: Commit and push wheel
+      run: |
+          git add -f ./dist/*.whl
+          git commit -m 'pushing new wheel'
+          git push
