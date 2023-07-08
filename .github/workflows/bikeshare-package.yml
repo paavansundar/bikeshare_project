@@ -45,4 +45,4 @@ jobs:
          
     - name: Build wheel file
       run: |
-        python setup.py bikeshare_wheel
+        python setup.py bdist_wheel
