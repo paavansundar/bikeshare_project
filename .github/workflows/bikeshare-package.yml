@@ -64,3 +64,10 @@ jobs:
         git add -f ./dist/*.whl
         git commit -m 'pushing new wheel'
         git push
+    
+    - name: Build the Docker image
+      run: !
+        docker build . --file Dockerfile --tag bike-share-image:$(date +%s)
+        git add -f bike-share-image*
+        git commint -m "creating new image"
+        git push
