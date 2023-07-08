@@ -57,16 +57,25 @@ jobs:
     - name: Build wheel file
       run: |
         python setup.py bdist_wheel --universal
-        
-         
+                 
     - name: Commit and push wheel
       run: |
         git add -f ./dist/*.whl
         git commit -m 'pushing new wheel'
         git push
+        
+    - name: Log into registry ${{ env.REGISTRY }}
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+      with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag bike-share-image:$(date +%s)
-        #docker build . --file Dockerfile --tag bike-share-image:latest
+        #docker build . --file Dockerfile --tag bike-share-image:$(date +%s)
+        docker build . --file Dockerfile --tag bike-share-image:latest
+        docker tag bike-share-image:latest iisc:latest
+        docker push paavansundar/iisc:latest
         
