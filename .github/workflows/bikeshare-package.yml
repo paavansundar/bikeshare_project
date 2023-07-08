@@ -67,8 +67,6 @@ jobs:
     
     - name: Build the Docker image
       run: |
-        # docker build . --file Dockerfile --tag bike-share-image:$(date +%s)
-        docker build . --file Dockerfile --tag bike-share-image:latest
-        git add -f ./bike-share-image:latest
-        git commint -m "creating new image" --./dist
-        git push
+        docker build . --file Dockerfile --tag bike-share-image:$(date +%s)
+        #docker build . --file Dockerfile --tag bike-share-image:latest
+        
