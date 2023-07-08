@@ -45,4 +45,4 @@ jobs:
          
     - name: Build wheel file
       run: |
-        python setup.py bdist_wheel
+        python setup.py bdist_wheel --dist-dir dist
