@@ -64,14 +64,14 @@ jobs:
         git commit -m 'pushing new wheel'
         git push
         
-    - name: Log into registry $REGISTRY
+    - name: Log into registry ${{ env.REGISTRY }}
       uses: docker/login-action@v2
       with:
-          registry: $REGISTRY
-          username: $DOCKER_HUB_UID
-          password: $DOCKER_HUB_PWD
+          registry: ${{ env.REGISTRY }}
+          username: ${{ env.DOCKER_HUB_UID }}
+          password: ${{ secrets.DOCKER_HUB_PWD }}
     
-    - name: Build the Docker image
+    - name: Build and push Docker image
       run: |
         #docker build . --file Dockerfile --tag bike-share-image:$(date +%s)
         docker build . --file Dockerfile --tag bike-share-image:latest
