@@ -1,6 +1,6 @@
 FROM python:3.10
 
-ADD ./bikeshare_mode/ /bikeshare_model
+ADD ./bikeshare_model /bikeshare_model
 WORKDIR /bikeshare_model
 
 COPY ./requirements/requirements.txt ./
