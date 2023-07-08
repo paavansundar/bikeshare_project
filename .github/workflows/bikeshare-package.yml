@@ -65,11 +65,12 @@ jobs:
         git push
         
     - name: Log into registry 
-      uses: docker/login-action@v2.1.0
-      with:
-          #registry: ${{ env.REGISTRY }}
-          username: ${{ env.DOCKER_HUB_UID }}
-          password: ${{ secrets.DOCKER_HUB_PWD }}
+      #uses: docker/login-action@v2.1.0
+      #with:
+      env:
+        DOCKER_USER: ${{ env.DOCKER_HUB_UID }}
+        DOCKER_PWD: ${{ secrets.DOCKER_HUB_PWD }}
+      run: docker login -u $DOCKER_USER -p $DOCKER_PWD
     
     
     - name: Build and push Docker image
