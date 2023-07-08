@@ -79,3 +79,6 @@ jobs:
         docker tag bike-share-image:latest paavansundar/iisc:latest
         docker push paavansundar/iisc:latest
         
+    - name: Docker logout
+      run: docker logout
+        
