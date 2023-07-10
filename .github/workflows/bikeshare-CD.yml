@@ -1,9 +1,9 @@
-name: Docker Image CD
+name: bikeshare CD
 
 # Only trigger, when the build workflow succeeded
 on:
   workflow_run:
-    workflows: ["Python package"]
+    workflows: ["bikeshare CI"]
     types:
       - completed
 
@@ -13,15 +13,7 @@ jobs:
 
     runs-on: [self-hosted]
 
-    steps:
-    #- uses: actions/checkout@v3
-    - name: Log into registry 
-      uses: docker/login-action@v2.1.0
-      with:
-          #registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.DOCKER_HUB_UID }}
-          password: ${{ secrets.DOCKER_HUB_PWD }}
-    
+    steps:  
     
     - name: Build and push Docker image
       run: |
