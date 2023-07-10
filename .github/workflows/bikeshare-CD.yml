@@ -3,7 +3,7 @@ name: Docker Image CD
 # Only trigger, when the build workflow succeeded
 on:
   workflow_run:
-    workflows: ["bikeshare-package"]
+    workflows: ["Python package"]
     types:
       - completed
 
