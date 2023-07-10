@@ -1,18 +1,20 @@
 name: Docker Image CD
 
+# Only trigger, when the build workflow succeeded
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: ["CI build"]
+    types:
+      - completed
 
 jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    #- uses: actions/checkout@v3
+    - name: checkout and run docker image
+      run: |
+        docker login 
