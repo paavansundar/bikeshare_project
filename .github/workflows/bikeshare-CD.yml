@@ -25,5 +25,5 @@ jobs:
     
     - name: Build and push Docker image
       run: |
-        docker pull paavansundar/iisc:latest
-        docker run paavansundar/iisc:latest 
+        sudo docker pull paavansundar/iisc:latest
+        sudo docker run paavansundar/iisc:latest 
